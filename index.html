@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ewelina Michalska | FansOnly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #00aff0;
+            --main-hover: #008ec2;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #242526;
+            --text-muted: #8a96a3;
+            --border-color: #e4e6eb;
+            --success-color: #4cd964;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* 3-kolumnowy układ dla dużych ekranów */
+        .page-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            background: var(--card-bg);
+            min-height: 100vh;
+        }
+
+        /* --- LEWY PANEL BOCZNY (DESKTOP) --- */
+        .left-sidebar {
+            width: 260px;
+            border-right: 1px solid var(--border-color);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--main-color);
+            letter-spacing: -0.5px;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background 0.2s;
+            color: #334155;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            background: rgba(0, 175, 240, 0.08);
+            color: var(--main-color);
+        }
+
+        .menu-badge {
+            background: #ff3b30;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            position: absolute;
+            right: 16px;
+        }
+
+        /* --- PRAWY PANEL BOCZNY (DESKTOP) --- */
+        .right-sidebar {
+            width: 280px;
+            border-left: 1px solid var(--border-color);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            background: #fafafa;
+        }
+
+        .card-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cel Napiwków */
+        .goal-bar-container {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .goal-bar-fill {
+            background: var(--main-color);
+            width: 82%;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .goal-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        /* Aktywność na żywo */
+        .live-ticker {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .ticker-item:last-child {
+            border-bottom: none;
+        }
+
+        .ticker-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--main-color);
+            border-radius: 50%;
+        }
+
+        /* Rekomendacje profili */
+        .rec-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .rec-item-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .rec-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        .btn-mini-sub {
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: var(--main-color);
+            color: white;
+            font-size: 10px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* --- GŁÓWNY WRAPPER (ŚRODKOWA KOLUMNA) --- */
+        .wrapper {
+            flex: 1;
+            max-width: 660px;
+            background: var(--card-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Kompaktowa belka górna */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-arrow {
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .header-info-title {
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .verified-badge {
+            width: 14px;
+            height: 14px;
+            background: var(--main-color);
+            color: #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        .header-info-subs {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .header-logo {
+            color: var(--main-color);
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Bardzo niski cover, aby zaoszczędzić miejsce w pionie */
+        .cover {
+            height: 100px;
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+            position: relative;
+        }
+
+        /* Profil i Bio */
+        .profile-section {
+            padding: 0 16px 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Mniejszy avatar, nachodzący na cover */
+        .avatar-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+            position: absolute;
+            top: -40px;
+            left: 16px;
+            background: #e2e8f0;
+            cursor: pointer;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .online-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--success-color);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+        }
+
+        /* Akcje profilu (prawy róg) */
+        .profile-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            padding-top: 10px;
+            height: 48px;
+        }
+
+        .btn-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-main);
+            transition: background 0.2s;
+        }
+
+        .btn-circle:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-message {
+            height: 32px;
+            padding: 0 12px;
+            border-radius: 16px;
+            border: 1px solid var(--main-color);
+            background: transparent;
+            color: var(--main-color);
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-message:hover {
+            background: rgba(0, 175, 240, 0.05);
+        }
+
+        /* Szczegóły profilu */
+        .profile-details {
+            margin-top: 6px;
+        }
+
+        .profile-display-name {
+            font-size: 17px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .profile-username-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .status-badge {
+            background: rgba(76, 217, 100, 0.15);
+            color: #2f9e44;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 9px;
+        }
+
+        .profile-bio {
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #334155;
+            margin-top: 6px;
+        }
+
+        /* Oficjalne liczniki (139 wideo, 311 zdjęć) */
+        .counters-bar {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .counter-item {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .counter-val {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* --- POTĘŻNY NIEBIESKI PRZYCISK CTA (MAKSYMALNA KONWERSJA) --- */
+        .cta-container {
+            padding: 8px 16px;
+            background: #fff;
+        }
+
+        .big-blue-button {
+            width: 100%;
+            background: #00aff0;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 35px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 175, 240, 0.4);
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            animation: pulse-button 2s infinite;
+        }
+
+        .big-blue-button:hover {
+            background: var(--main-hover);
+            transform: scale(1.01);
+        }
+
+        .cta-subtext {
+            font-size: 10px;
+            font-weight: 400;
+            opacity: 0.9;
+            text-transform: none;
+        }
+
+        @keyframes pulse-button {
+            0% { box-shadow: 0 0 0 0 rgba(0, 175, 240, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 175, 240, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 175, 240, 0); }
+        }
+
+        /* Karty/Taby */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            color: var(--main-color);
+            border-bottom-color: var(--main-color);
+        }
+
+        /* --- SIATKA FILMIKÓW (ZOPTYMALIZOWANA POD ROZDZIELCZOŚĆ) --- */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            padding: 2px;
+            background: #f8f9fa;
+        }
+
+        .video-card {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background: #111;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(5px) brightness(0.85); /* Zmniejszono rozmycie o połowę */
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.15);
+        }
+
+        /* Trójkątny przycisk Play na środku */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+
+        .play-triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
+            border-color: transparent transparent transparent #242526;
+            margin-left: 2px;
+        }
+
+        /* Informacje na dole karty wideo */
+        .video-bottom-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 4px 6px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: #fff;
+            font-size: 9px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .video-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-stats {
+            display: flex;
+            justify-content: space-between;
+            opacity: 0.85;
+            font-size: 8px;
+        }
+
+        /* Liczba darmowych wyświetleń u góry */
+        .free-tag {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: rgba(0, 175, 240, 0.9);
+            color: #fff;
+            padding: 1px 4px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+
+        /* --- KAFELKI DUMMY --- */
+        .dummy-locked-card {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px;
+            color: var(--main-color);
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px dashed rgba(0, 175, 240, 0.4);
+        }
+
+        .dummy-locked-card span {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .dummy-locked-card p {
+            font-size: 10px;
+            line-height: 1.2;
+        }
+
+        /* --- SZYBKI CZAT (NA DOLE LEWEGO PANELU) --- */
+        .chat-list {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .chat-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .chat-user:hover {
+            background: #f1f5f9;
+        }
+
+        .chat-ava-container {
+            position: relative;
+        }
+
+        .chat-ava {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        .chat-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 140px;
+        }
+
+        .unread-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff3b30;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+
+        /* --- MODAL REJESTRACJI --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            transform: translateY(20px);
+            transition: all 0.25s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-badge-18 {
+            display: inline-block;
+            background: #ff3b30;
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .modal-description {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .modal-bullet-list {
+            text-align: left;
+            display: inline-block;
+            margin: 0 auto 20px auto;
+            font-size: 12px;
+            color: #334155;
+            list-style: none;
+        }
+
+        .modal-bullet-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-bullet-list li::before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .modal-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--main-color);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 175, 240, 0.3);
+            transition: background 0.2s;
+        }
+
+        .modal-submit-btn:hover {
+            background: var(--main-hover);
+        }
+
+        .modal-cancel-link {
+            margin-top: 14px;
+            display: inline-block;
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Ukrywanie bocznych paneli na mniejszych rozdzielczościach */
+        @media (max-width: 1024px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-sidebar {
+                display: none;
+            }
+            .wrapper {
+                border-left: none;
+                border-right: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+
+        <!-- LEWY PANEL BOCZNY (Widoczny tylko na komputerach) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-logo" onclick="triggerPopup()">FansOnly</div>
+            <ul class="menu-list">
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>🏠</span> Strona główna
+                </li>
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>🔔</span> Powiadomienia <span class="menu-badge">2</span>
+                </li>
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>✉️</span> Wiadomości <span class="menu-badge">1</span>
+                </li>
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>🔖</span> Zakładki
+                </li>
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>📝</span> Listy
+                </li>
+                <li class="menu-item" onclick="triggerPopup()">
+                    <span>👤</span> Mój profil
+                </li>
+            </ul>
+
+            <!-- Szybki feykowy czat pod menu -->
+            <div class="chat-list">
+                <div class="chat-title">Ostatnie rozmowy</div>
+                <div class="chat-user" onclick="triggerPopup()">
+                    <div class="chat-ava-container">
+                        <div class="chat-ava" style="background-color: #fca5a5;"></div>
+                        <div class="online-dot" style="bottom: 0; right: 0;"></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; font-weight: 700;">Kasia_PL</div>
+                        <div class="chat-text">Hej, wyślesz ten nowy fi...</div>
+                    </div>
+                    <div class="unread-dot"></div>
+                </div>
+                <div class="chat-user" onclick="triggerPopup()">
+                    <div class="chat-ava" style="background-color: #93c5fd;"></div>
+                    <div>
+                        <div style="font-size: 12px; font-weight: 700;">Marek91</div>
+                        <div class="chat-text">Twoje filmy są niesamowite</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- GŁÓWNA STRONA (ŚRODEK) -->
+        <div class="wrapper">
+            
+            <!-- Górna belka nawigacyjna -->
+            <header class="header">
+                <div class="header-left">
+                    <span class="back-arrow" onclick="triggerPopup()">←</span>
+                    <div>
+                        <div class="header-info-title">Ewelina Michalska <span class="verified-badge">✓</span></div>
+                        <div class="header-info-subs">139 filmów • 311 zdjęć</div>
+                    </div>
+                </div>
+                <div class="header-logo">FansOnly</div>
+            </header>
+
+            <!-- Tło profilu (niskie, oszczędzające miejsce) -->
+            <div class="cover" onclick="triggerPopup()"></div>
+
+            <!-- Sekcja profilu -->
+            <div class="profile-section">
+                <div class="avatar-wrapper" onclick="triggerPopup()">
+                    <img class="avatar-img" src="ava.jpg" alt="Ewelina Michalska" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23ccc\'/><text x=\'50%\' y=\'50%\' font-size=\'12\' text-anchor=\'middle\' dy=\'.3em\'>ava.jpg</text></svg>'">
+                    <div class="online-dot"></div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn-circle" onclick="triggerPopup()">⭐</button>
+                    <button class="btn-circle" onclick="triggerPopup()">🔔</button>
+                    <button class="btn-message" onclick="triggerPopup()">Napisz wiadomość</button>
+                </div>
+
+                <div class="profile-details">
+                    <h1 class="profile-display-name">
+                        Ewelina Michalska 
+                        <span class="verified-badge" title="Profil zweryfikowany">✓</span>
+                    </h1>
+                    
+                    <div class="profile-username-row">
+                        <span>@ewelina_warszawa</span>
+                        <span>•</span>
+                        <span>42 lata</span>
+                        <span>•</span>
+                        <span>📍 Warszawa, Polska</span>
+                        <span class="status-badge">ONLINE</span>
+                    </div>
+
+                    <div class="profile-bio">
+                        Przegrałam zakład i teraz muszę wrzucać tutaj swoje wideo 😭 Obiecałam znajomym, że nie usunę profilu przez rok... Wspierajcie mnie! Wszystko za darmo.
+                    </div>
+
+                    <!-- Liczniki na sztywno: 139 wideo i 311 zdjęć -->
+                    <div class="counters-bar">
+                        <div class="counter-item"><span class="counter-val">139</span> wideo</div>
+                        <div class="counter-item"><span class="counter-val">311</span> zdjęcia</div>
+                        <div class="counter-item"><span class="counter-val">45.2k</span> polubień</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- PRZYCISK CTA --- -->
+            <div class="cta-container">
+                <button class="big-blue-button" onclick="triggerPopup()">
+                    ZOBACZ GORĄCE FILMY ZA DARMO
+                    <span class="cta-subtext">Bez podawania karty kredytowej • Rejestracja jest w 100% bezpłatna!</span>
+                </button>
+            </div>
+
+            <!-- Taby -->
+            <div class="tabs">
+                <div class="tab active" onclick="triggerPopup()">FILMY (139)</div>
+                <div class="tab" onclick="triggerPopup()">ZDJĘCIA (311)</div>
+                <div class="tab" onclick="triggerPopup()">POSTY (154)</div>
+            </div>
+
+            <!-- Siatka wideo -->
+            <div class="media-grid" id="mediaGrid">
+                <!-- Tutaj zostaną wstrzyknięte 14 filmów za pomocą JS -->
+            </div>
+
+        </div>
+
+        <!-- PRAWY PANEL BOCZNY (Widoczny tylko na dużych ekranach) -->
+        <aside class="right-sidebar">
+            <!-- Cel napiwków -->
+            <div class="sidebar-card" onclick="triggerPopup()" style="cursor: pointer;">
+                <div class="card-title">Cel napiwków</div>
+                <div style="font-size: 13px; font-weight: 700; color: #1e293b;">Nowa bielizna na sesję z basenu 👙</div>
+                <div class="goal-bar-container">
+                    <div class="goal-bar-fill"></div>
+                </div>
+                <div class="goal-info">
+                    <span>$420 zebrane</span>
+                    <span>$500 cel</span>
+                </div>
+            </div>
+
+            <!-- Aktywność na żywo -->
+            <div class="sidebar-card">
+                <div class="card-title">Aktywność na profilu</div>
+                <div class="live-ticker">
+                    <div class="ticker-item">
+                        <div class="ticker-dot"></div>
+                        <div>Użytkownik <b>tomek_wawa</b> wysłał napiwek $10</div>
+                    </div>
+                    <div class="ticker-item">
+                        <div class="ticker-dot"></div>
+                        <div>Użytkownik <b>arek90</b> polubił wideo #3</div>
+                    </div>
+                    <div class="ticker-item">
+                        <div class="ticker-dot"></div>
+                        <div>Użytkownik <b>michal_pl</b> dołączył do subskrypcji</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rekomendowane profile -->
+            <div class="sidebar-card">
+                <div class="card-title">Sugerowane dla Ciebie</div>
+                <div class="rec-item">
+                    <div class="rec-item-info">
+                        <div class="rec-avatar" style="background-color: #c084fc;"></div>
+                        <div>Karolina_X <span class="verified-badge">✓</span></div>
+                    </div>
+                    <button class="btn-mini-sub" onclick="triggerPopup()">Obserwuj</button>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-item-info">
+                        <div class="rec-avatar" style="background-color: #f472b6;"></div>
+                        <div>Ola_Wro <span class="verified-badge">✓</span></div>
+                    </div>
+                    <button class="btn-mini-sub" onclick="triggerPopup()">Obserwuj</button>
+                </div>
+            </div>
+
+            <!-- Bezpieczeństwo -->
+            <div style="font-size: 10px; color: var(--text-muted); text-align: center; margin-top: auto; padding-bottom: 20px;">
+                © 2026 FansOnly Media, Inc. <br>
+                DMCA PROTECTED • 18+ ONLY
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- MODAL REJESTRACJI -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-badge-18">18+</div>
+            <div class="modal-title">Dostęp zablokowany</div>
+            <div class="modal-description">Ten profil zawiera bezpłatne materiały przeznaczone wyłącznie dla osób dorosłych. Wymagana jest szybka i bezpłatna weryfikacja wieku.</div>
+            
+            <ul class="modal-bullet-list">
+                <li>100% darmowy dostęp do profilu</li>
+                <li>Bez podawania karty kredytowej / płatniczej</li>
+                <li>Dostęp do czatu prywatnego z Eweliną</li>
+                <li>Brak ukrytych opłat i subskrypcji</li>
+            </ul>
+
+            <button class="modal-submit-btn" onclick="redirectToRegister()">UTWÓRZ DARMOWE KONTO</button>
+            <div class="modal-cancel-link" onclick="closePopup()">Wróć na stronę</div>
+        </div>
+    </div>
+
+    <script>
+        // Tytuły dopasowane do opisu o przegranym zakładzie
+        const titles = [
+            "Wideo #1 - Trochę się wstydzę... 🙈",
+            "Przegrany zakład - filmik z sypialni",
+            "Szybkie nagranie przed pracą",
+            "Koleżanka kazała mi to wrzucić!",
+            "Spełniam obietnicę, chociaż ciężko",
+            "Nocny klimat w Warszawie",
+            "Co myślicie o tym stroju?",
+            "Mój ulubiony filmik, oceńcie sami",
+            "Znowu to robię... Obietnica to obietnica",
+            "Poranny relaks, Warszawa pozdrawia",
+            "Kolejna część kary za przegraną",
+            "Krótki filmik w weekend",
+            "Chyba za dużo pokazałam 🤫",
+            "Ostatnie nagranie z wczorajszego wieczoru"
+        ];
+
+        const grid = document.getElementById('mediaGrid');
+
+        // Generowanie 14 kart z realnymi obrazkami 1.jpg - 14.jpg
+        for (let i = 1; i <= 14; i++) {
+            const views = (Math.random() * 15 + 3).toFixed(1) + 'k';
+            const min = Math.floor(Math.random() * 8) + 1;
+            const sec = Math.floor(Math.random() * 50) + 10;
+            const duration = `${min}:${sec}`;
+            const title = titles[i - 1] || `Klip wideo #${i}`;
+
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.setAttribute('onclick', 'triggerPopup()');
+            card.innerHTML = `
+                <div class="free-tag">Darmowe</div>
+                <div class="play-overlay"><div class="play-triangle"></div></div>
+                <img class="video-thumbnail" src="${i}.jpg" alt="Podgląd wideo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%2334495e\'/><text x=\'50%\' y=\'50%\' font-size=\'14\' fill=\'%23fff\' text-anchor=\'middle\' dy=\'.3em\'>${i}.jpg</text></svg>'">
+                <div class="video-bottom-info">
+                    <div class="video-title">${title}</div>
+                    <div class="video-stats">
+                        <span>👁 ${views}</span>
+                        <span>⏱ ${duration}</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+
+        // Dodanie 15 i 16 kafelka jako zajawki (Więcej ukrytych materiałów)
+        const dummyCard = document.createElement('div');
+        dummyCard.className = 'video-card dummy-locked-card';
+        dummyCard.setAttribute('onclick', 'triggerPopup()');
+        dummyCard.innerHTML = `
+            <span>🔒</span>
+            <p>+125 filmów</p>
+            <p style="font-size: 8px; opacity: 0.8; margin-top: 2px;">Odblokuj za darmo</p>
+        `;
+        grid.appendChild(dummyCard);
+
+        const dummyPhotoCard = document.createElement('div');
+        dummyPhotoCard.className = 'video-card dummy-locked-card';
+        dummyPhotoCard.style.background = 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)';
+        dummyPhotoCard.style.color = '#d97706';
+        dummyPhotoCard.style.border = '2px dashed rgba(217, 119, 6, 0.4)';
+        dummyPhotoCard.setAttribute('onclick', 'triggerPopup()');
+        dummyPhotoCard.innerHTML = `
+            <span>📷</span>
+            <p>+311 zdjęć</p>
+            <p style="font-size: 8px; opacity: 0.8; margin-top: 2px;">Odblokuj za darmo</p>
+        `;
+        grid.appendChild(dummyPhotoCard);
+
+        // Zarządzanie pop-upem
+        const modal = document.getElementById('registerModal');
+
+        function triggerPopup() {
+            modal.classList.add('active');
+        }
+
+        function closePopup() {
+            modal.classList.remove('active');
+        }
+
+        function redirectToRegister() {
+            window.location.href = "https://register-on-website.com/";
+        }
+
+        // Zamknięcie po kliknięciu poza okno
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closePopup();
+        });
+    </script>
+</body>
+</html>
+```

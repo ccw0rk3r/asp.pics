@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ewelina Michalska | FansOnly Official</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        /* Custom animations for high conversion */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+        .online-pulse {
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+        @keyframes subtle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        .bounce-cta {
+            animation: subtle-bounce 3s infinite ease-in-out;
+        }
+        /* Custom blur optimization */
+        .preview-blur {
+            filter: blur(2.5px) brightness(0.85);
+            transition: all 0.3s ease;
+        }
+        .video-card:hover .preview-blur {
+            filter: blur(1.5px) brightness(0.9);
+            transform: scale(1.05);
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="text-[#242526] antialiased min-height-screen">
+
+    <div class="flex justify-center min-h-screen">
+        <div class="flex w-full max-w-[1240px] bg-white min-h-screen shadow-2xl">
+
+            <!-- LEWY PANEL BOCZNY (DESKTOP) -->
+            <aside class="hidden md:flex flex-col w-[270px] border-r border-[#e4e6eb] p-4 sticky top-0 h-screen justify-between bg-white z-50">
+                <div class="flex flex-col gap-6">
+                    <div class="text-2xl font-black text-[#00aff0] tracking-tight pl-3 cursor-pointer select-none" onclick="triggerPopup()">
+                        Fans<span class="text-slate-800">Only</span>
+                    </div>
+                    
+                    <nav class="flex flex-col gap-1">
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition">
+                            <span class="text-lg">🏠</span> Główna
+                        </div>
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition relative">
+                            <span class="text-lg">🔔</span> Powiadomienia
+                            <span class="absolute right-4 bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-black">3</span>
+                        </div>
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition relative">
+                            <span class="text-lg">✉️</span> Wiadomości
+                            <span class="absolute right-4 bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-black">1</span>
+                        </div>
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition">
+                            <span class="text-lg">🔖</span> Zakładki
+                        </div>
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition">
+                            <span class="text-lg">👥</span> Listy prywatne
+                        </div>
+                        <div onclick="triggerPopup()" class="flex items-center gap-4 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#00aff0] rounded-full cursor-pointer transition">
+                            <span class="text-lg">👤</span> Twój Profil
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- Interaktywny czat na żywo (Zwiększa wiarygodność) -->
+                <div class="border-t border-[#e4e6eb] pt-4 mt-auto">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3 px-3">Aktywne czaty</p>
+                    <div onclick="triggerPopup()" class="flex items-center gap-3 p-2 hover:bg-slate-50 rounded-xl cursor-pointer transition relative">
+                        <div class="relative w-10 h-10 flex-shrink-0">
+                            <img src="ava.jpg" alt="Ewelina" class="w-full h-full object-cover rounded-full border border-slate-200" onerror="this.src='https://placehold.co/100x100/eaeaea/999999?text=Ewelina'">
+                            <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full online-pulse"></span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-800">Ewelina Michalska</span>
+                                <span class="w-2 h-2 bg-rose-500 rounded-full"></span>
+                            </div>
+                            <!-- Dynamicznie animowane "pisanie" -->
+                            <div class="flex items-center gap-1 mt-0.5 text-[11px] text-[#00aff0] font-medium" id="chat-typing-status">
+                                <span class="animate-pulse">pisze wiadomość</span>
+                                <span class="flex gap-0.5">
+                                    <span class="w-1 h-1 bg-[#00aff0] rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                                    <span class="w-1 h-1 bg-[#00aff0] rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                                    <span class="w-1 h-1 bg-[#00aff0] rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- GŁÓWNA STRONA (ŚRODEK) -->
+            <main class="flex-1 max-w-[640px] border-r border-[#e4e6eb] min-h-screen flex flex-col bg-white">
+                
+                <!-- Kompaktowa belka górna -->
+                <header class="sticky top-0 bg-white/95 backdrop-blur-md z-40 border-b border-[#e4e6eb] px-4 py-2.5 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl cursor-pointer hover:text-[#00aff0] transition" onclick="triggerPopup()">←</span>
+                        <div>
+                            <h2 class="font-extrabold text-base flex items-center gap-1">
+                                Ewelina Michalska
+                                <span class="w-4 h-4 bg-[#00aff0] text-white rounded-full flex items-center justify-center text-[8px] font-black" title="Profil Zweryfikowany">✓</span>
+                            </h2>
+                            <p class="text-[11px] text-slate-400 font-medium">139 filmów • 311 zdjęć</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-[11px] font-bold text-green-600 tracking-wider">ONLINE NOW</span>
+                    </div>
+                </header>
+
+                <!-- Bardzo niski cover z luksusowym gradientem i logotypem -->
+                <div class="h-[120px] bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400 relative cursor-pointer" onclick="triggerPopup()">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                </div>
+
+                <!-- Profil i Bio -->
+                <section class="px-4 pb-4 border-b border-[#e4e6eb] relative bg-white">
+                    
+                    <!-- Avatar najeżdżający na cover -->
+                    <div class="absolute -top-[50px] left-4 w-[100px] h-[100px] rounded-full border-4 border-white bg-slate-100 shadow-md cursor-pointer group overflow-hidden" onclick="triggerPopup()">
+                        <img src="ava.jpg" alt="Ewelina Michalska" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/150x150/eaeaea/999999?text=Ewelina'">
+                        <div class="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                    </div>
+
+                    <!-- Przyciski akcji (prawy róg) -->
+                    <div class="flex justify-end gap-2 pt-3 h-14">
+                        <button class="w-10 h-10 rounded-full border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-sm transition" onclick="triggerPopup()">⭐</button>
+                        <button class="w-10 h-10 rounded-full border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-sm transition" onclick="triggerPopup()">🔔</button>
+                        <button class="px-5 h-10 rounded-full border-2 border-[#00aff0] text-[#00aff0] font-bold text-xs hover:bg-sky-50/50 transition duration-200" onclick="triggerPopup()">
+                            Napisz prywatną wiadomość
+                        </button>
+                    </div>
+
+                    <!-- Szczegóły profilu -->
+                    <div class="mt-2">
+                        <h1 class="text-xl font-extrabold flex items-center gap-1.5 text-slate-900">
+                            Ewelina Michalska
+                            <span class="w-5 h-5 bg-[#00aff0] text-white rounded-full flex items-center justify-center text-[10px] font-black" title="Profil Zweryfikowany">✓</span>
+                        </h1>
+                        
+                        <div class="flex flex-wrap gap-x-3 gap-y-1 items-center text-xs text-slate-500 mt-1 font-medium">
+                            <span class="text-slate-800 font-semibold">@ewelina_warszawa</span>
+                            <span class="text-slate-300">•</span>
+                            <span>42 lata</span>
+                            <span class="text-slate-300">•</span>
+                            <span>📍 Warszawa, Polska</span>
+                            <span class="text-slate-300">•</span>
+                            <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-bold">AKTYWNA</span>
+                        </div>
+
+                        <p class="text-slate-700 text-xs md:text-sm leading-relaxed mt-3.5 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            Przegrałam zakład i teraz muszę wrzucać tutaj swoje wideo 😭 Obiecałam znajomym, że nie usunę profilu przez rok... Wspierajcie mnie! Wszystko za darmo.
+                        </p>
+
+                        <!-- Oficjalne liczniki -->
+                        <div class="flex gap-6 mt-4 pt-3 border-t border-slate-100">
+                            <div class="text-xs text-slate-500"><span class="font-extrabold text-slate-800 text-sm">139</span> filmów</div>
+                            <div class="text-xs text-slate-500"><span class="font-extrabold text-slate-800 text-sm">311</span> zdjęć</div>
+                            <div class="text-xs text-slate-500"><span class="font-extrabold text-slate-800 text-sm">45.2k</span> polubień</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- --- PRZYCISK CTA (MAKSYMALNA KONWERSJA) --- -->
+                <div class="p-4 bg-white sticky top-[60px] z-30 shadow-sm border-b border-slate-100">
+                    <button class="w-full bg-gradient-to-r from-[#00aff0] to-[#0092c8] text-white py-4 px-6 rounded-full font-black text-sm md:text-base flex flex-col items-center justify-center gap-1 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300 bounce-cta" onclick="triggerPopup()">
+                        <span class="flex items-center gap-2 tracking-wide uppercase">
+                            🔒 Odblokuj Gorące Filmy Za Darmo
+                        </span>
+                        <span class="text-[10px] md:text-xs font-normal opacity-90">
+                            Bez podawania karty kredytowej • Rejestracja jest w 100% bezpłatna!
+                        </span>
+                    </button>
+                    <!-- Certyfikaty i Social Proof (Maksymalny Trust) -->
+                    <div class="flex justify-center items-center gap-6 mt-3 text-[10px] text-slate-400 font-bold">
+                        <span class="flex items-center gap-1">🛡️ Certyfikat SSL Secure</span>
+                        <span>•</span>
+                        <span class="flex items-center gap-1">🔞 Tylko dla dorosłych 18+</span>
+                        <span>•</span>
+                        <span class="flex items-center gap-1">⭐ Zweryfikowany Twórca</span>
+                    </div>
+                </div>
+
+                <!-- Taby -->
+                <div class="flex border-b border-[#e4e6eb] bg-white text-xs font-bold text-slate-500">
+                    <div class="flex-1 text-center py-3.5 border-b-2 border-[#00aff0] text-[#00aff0] cursor-pointer" onclick="triggerPopup()">FILMY (139)</div>
+                    <div class="flex-1 text-center py-3.5 hover:text-slate-800 cursor-pointer" onclick="triggerPopup()">ZDJĘCIA (311)</div>
+                    <div class="flex-1 text-center py-3.5 hover:text-slate-800 cursor-pointer" onclick="triggerPopup()">POSTY (154)</div>
+                </div>
+
+                <!-- Live FOMO Notification Bar -->
+                <div class="bg-rose-50 px-4 py-2 border-b border-rose-100 flex items-center justify-between text-[11px] text-rose-700 font-bold">
+                    <span class="flex items-center gap-1.5 animate-pulse">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span>
+                        NA ŻYWO: <span id="live-viewer-count">1,429</span> użytkowników przegląda ten profil
+                    </span>
+                    <span class="bg-rose-200/50 px-2 py-0.5 rounded">Odświeżono przed chwilą</span>
+                </div>
+
+                <!-- Siatka wideo -->
+                <div class="grid grid-cols-3 gap-[2px] p-[2px] bg-slate-50" id="mediaGrid">
+                    <!-- Karty wstrzykiwane przez JS -->
+                </div>
+
+            </main>
+
+            <!-- PRAWY PANEL BOCZNY (DESKTOP) -->
+            <aside class="hidden lg:flex flex-col w-[330px] p-4 gap-4 sticky top-0 h-screen overflow-y-auto bg-slate-50/50 z-50">
+                
+                <!-- Cel Napiwków (Interaktywny i dynamiczny) -->
+                <div class="bg-white border border-[#e4e6eb] rounded-2xl p-4 shadow-sm cursor-pointer hover:shadow-md transition" onclick="triggerPopup()">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Aktualny cel profilu</div>
+                    <div class="font-extrabold text-sm text-slate-800">Nowa bielizna na sesję z basenu 👙</div>
+                    
+                    <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden mt-3 mb-1.5">
+                        <div class="bg-[#00aff0] h-full rounded-full transition-all duration-1000" style="width: 89%" id="goal-bar"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-600">
+                        <span>$445 zebrane</span>
+                        <span class="text-[#00aff0]">$500 cel</span>
+                    </div>
+                </div>
+
+                <!-- Aktywność na żywo (Ticking i dynamiczny) -->
+                <div class="bg-white border border-[#e4e6eb] rounded-2xl p-4 shadow-sm flex flex-col gap-3">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Aktywność fanów na żywo</div>
+                    
+                    <div class="flex flex-col gap-2.5 text-xs max-h-[220px] overflow-hidden" id="live-ticker">
+                        <!-- Dynamic ticker elements added by JS -->
+                    </div>
+                </div>
+
+                <!-- Rekomendowane profile -->
+                <div class="bg-white border border-[#e4e6eb] rounded-2xl p-4 shadow-sm">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Polecane dla Ciebie</div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between" onclick="triggerPopup()">
+                            <div class="flex items-center gap-2.5 cursor-pointer">
+                                <div class="w-9 h-9 rounded-full bg-purple-300"></div>
+                                <div>
+                                    <div class="text-xs font-bold text-slate-800 flex items-center gap-0.5">Karolina_X <span class="text-[8px] text-[#00aff0]">✓</span></div>
+                                    <div class="text-[10px] text-slate-400">@karolina_wroc</div>
+                                </div>
+                            </div>
+                            <button class="bg-[#00aff0] text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full hover:bg-[#0092c8]">Obserwuj</button>
+                        </div>
+
+                        <div class="flex items-center justify-between" onclick="triggerPopup()">
+                            <div class="flex items-center gap-2.5 cursor-pointer">
+                                <div class="w-9 h-9 rounded-full bg-pink-300"></div>
+                                <div>
+                                    <div class="text-xs font-bold text-slate-800 flex items-center gap-0.5">Ola_Wro <span class="text-[8px] text-[#00aff0]">✓</span></div>
+                                    <div class="text-[10px] text-slate-400">@ola_wroclaw</div>
+                                </div>
+                            </div>
+                            <button class="bg-[#00aff0] text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full hover:bg-[#0092c8]">Obserwuj</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stopka zaufania -->
+                <div class="text-[10px] text-slate-400 text-center flex flex-col gap-1 mt-auto pb-4">
+                    <p>© 2026 FansOnly Media, Inc.</p>
+                    <p>DMCA PROTECTED • 18+ ONLY</p>
+                    <p class="font-bold text-emerald-600">🛡️ Połączenie szyfrowane AES-256</p>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- MODAL REJESTRACJI -->
+    <div class="modal-overlay p-4" id="registerModal">
+        <div class="modal-content bg-white w-full max-w-[420px] rounded-3xl p-6 text-center shadow-2xl relative border border-slate-100">
+            
+            <div class="inline-block bg-rose-500 text-white font-extrabold text-xs px-3 py-1 rounded-lg mb-4 select-none">
+                🔞 WYMAGANA WERYFIKACJA WIEKU 18+
+            </div>
+
+            <h3 class="text-xl font-black text-slate-900 mb-2">Odblokuj darmowy dostęp</h3>
+            
+            <p class="text-xs text-slate-500 leading-relaxed mb-5">
+                Konto Eweliny Michalskiej jest całkowicie darmowe. Ze względów bezpieczeństwa i prawa musisz założyć darmowe konto, aby zweryfikować wiek (18+).
+            </p>
+            
+            <!-- Lista benefitów darmowego konta -->
+            <ul class="text-left max-w-[310px] mx-auto flex flex-col gap-2.5 text-xs text-slate-700 font-semibold mb-6">
+                <li class="flex items-center gap-2">
+                    <span class="text-green-500 text-sm">✓</span> 100% darmowy dostęp do wszystkich 139 filmów
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-green-500 text-sm">✓</span> Brak opłat subskrypcyjnych i ukrytych prowizji
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-green-500 text-sm">✓</span> Odblokowanie bezpośredniego czatu z Eweliną
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-green-500 text-sm">✓</span> Szybka i bezpieczna rejestracja (poniżej 30 sekund)
+                </li>
+            </ul>
+
+            <button class="w-full bg-gradient-to-r from-[#00aff0] to-[#0092c8] text-white py-3.5 px-6 rounded-full font-black text-sm shadow-md hover:shadow-lg hover:scale-[1.01] transition-all" onclick="redirectToRegister()">
+                UTWÓRZ DARMOWE KONTO
+            </button>
+            
+            <button class="mt-4 text-xs text-slate-400 hover:text-slate-600 underline font-medium" onclick="closePopup()">
+                Wróć i przeglądaj dalej
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tytuły dopasowane do opisu o przegranym zakładzie
+        const titles = [
+            "Wideo #1 - Trochę się wstydzę... 🙈",
+            "Przegrany zakład - filmik z sypialni",
+            "Szybkie nagranie przed pracą",
+            "Koleżanka kazała mi to wrzucić!",
+            "Spełniam obietnicę, chociaż ciężko",
+            "Nocny klimat w Warszawie",
+            "Co myślicie o tym stroju?",
+            "Mój ulubiony filmik, oceńcie sami",
+            "Znowu to robię... Obietnica to obietnica",
+            "Poranny relaks, Warszawa pozdrawia",
+            "Kolejna część kary za przegraną",
+            "Krótki filmik w weekend",
+            "Chyba za dużo pokazałam 🤫",
+            "Ostatnie nagranie z wczorajszego wieczoru"
+        ];
+
+        const grid = document.getElementById('mediaGrid');
+
+        // Generowanie 14 kart z realnymi obrazkami 1.jpg - 14.jpg
+        for (let i = 1; i <= 14; i++) {
+            const views = (Math.random() * 15 + 3).toFixed(1) + 'k';
+            const min = Math.floor(Math.random() * 8) + 1;
+            const sec = Math.floor(Math.random() * 50) + 10;
+            const duration = `${min}:${sec}`;
+            const title = titles[i - 1] || `Klip wideo #${i}`;
+
+            const card = document.createElement('div');
+            card.className = 'video-card relative aspect-square bg-slate-900 overflow-hidden cursor-pointer group';
+            card.setAttribute('onclick', 'triggerPopup()');
+            card.innerHTML = `
+                <div class="absolute top-1.5 left-1.5 bg-[#00aff0] text-white px-1.5 py-0.5 rounded text-[8px] font-extrabold uppercase tracking-wide z-10 select-none shadow">
+                    Darmowe
+                </div>
+                <!-- Przycisk Play -->
+                <div class="absolute inset-0 flex items-center justify-center z-10">
+                    <div class="w-10 h-10 bg-white/95 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
+                        <div class="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-slate-800 ml-1"></div>
+                    </div>
+                </div>
+                <!-- Miniaturka z blurem zmniejszonym o połowę (2.5px) -->
+                <img class="preview-blur w-full h-full object-cover" src="${i}.jpg" alt="Podgląd" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%2334495e\'/><text x=\'50%\' y=\'50%\' font-size=\'14\' fill=\'%23fff\' text-anchor=\'middle\' dy=\'.3em\'>${i}.jpg</text></svg>'">
+                <!-- Informacje -->
+                <div class="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-white z-10 flex flex-col gap-0.5">
+                    <span class="text-[10px] font-bold truncate tracking-wide">${title}</span>
+                    <div class="flex justify-between items-center text-[8px] text-slate-300 font-semibold">
+                        <span class="flex items-center gap-0.5">👁️ ${views}</span>
+                        <span>⏱️ ${duration}</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+
+        // Dodatkowe kafelki "zajawki" (+125 filmów i +311 zdjęć)
+        const dummyCard = document.createElement('div');
+        dummyCard.className = 'video-card relative aspect-square bg-gradient-to-br from-sky-100 to-indigo-100 border border-dashed border-sky-300 flex flex-col items-center justify-center text-center p-2 cursor-pointer';
+        dummyCard.setAttribute('onclick', 'triggerPopup()');
+        dummyCard.innerHTML = `
+            <span class="text-xl mb-1">🔒</span>
+            <p class="text-xs font-extrabold text-[#00aff0]">+125 filmów</p>
+            <p class="text-[8px] font-bold text-slate-400 mt-1 uppercase">Kliknij i odblokuj</p>
+        `;
+        grid.appendChild(dummyCard);
+
+        const dummyPhotoCard = document.createElement('div');
+        dummyPhotoCard.className = 'video-card relative aspect-square bg-gradient-to-br from-pink-100 to-rose-100 border border-dashed border-pink-300 flex flex-col items-center justify-center text-center p-2 cursor-pointer';
+        dummyPhotoCard.setAttribute('onclick', 'triggerPopup()');
+        dummyPhotoCard.innerHTML = `
+            <span class="text-xl mb-1">📷</span>
+            <p class="text-xs font-extrabold text-pink-600">+311 zdjęć</p>
+            <p class="text-[8px] font-bold text-slate-400 mt-1 uppercase">Kliknij i odblokuj</p>
+        `;
+        grid.appendChild(dummyPhotoCard);
+
+        // Modalka logic
+        const modal = document.getElementById('registerModal');
+
+        function triggerPopup() {
+            modal.classList.add('active');
+        }
+
+        function closePopup() {
+            modal.classList.remove('active');
+        }
+
+        function redirectToRegister() {
+            window.location.href = "https://register-on-website.com/";
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closePopup();
+        });
+
+        // Dynamiczny live-ticker i symulacje akcji
+        const ticker = document.getElementById('live-ticker');
+        const userNames = ['tomek', 'arek_pl', 'michal90', 'kamil_w', 'piotr_warszawa', 'seba_g', 'mariusz', 'jacek_wwa', 'lukasz'];
+        const actions = [
+            'wysłał napiwek $5',
+            'wysłał napiwek $10',
+            'polubił wideo #3',
+            'polubił wideo #12',
+            'dołączył do darmowej subskrypcji',
+            'dodał profil do ulubionych'
+        ];
+
+        function addTickerItem() {
+            const randomUser = userNames[Math.floor(Math.random() * userNames.length)] + (Math.floor(Math.random() * 90) + 10);
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+            
+            const item = document.createElement('div');
+            item.className = 'flex items-center gap-2 pb-2 border-b border-dashed border-slate-100 animate-fadeIn';
+            item.innerHTML = `
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00aff0]"></span>
+                <div class="text-[11px] text-slate-600">
+                    Użytkownik <b>${randomUser}</b> ${randomAction}
+                </div>
+            `;
+            
+            ticker.prepend(item);
+            
+            // Limit do 6 elementów
+            if (ticker.children.length > 6) {
+                ticker.removeChild(ticker.lastChild);
+            }
+        }
+
+        // Zainicjowanie początkowych danych do tickera
+        for (let i = 0; i < 5; i++) {
+            addTickerItem();
+        }
+
+        // Dodawanie elementów do tickera co 4-7 sekund
+        setInterval(addTickerItem, Math.random() * 3000 + 4000);
+
+        // Dynamiczne zmienianie ilości widzów na żywo
+        const viewerElement = document.getElementById('live-viewer-count');
+        setInterval(() => {
+            const change = Math.floor(Math.random() * 15) - 7;
+            let current = parseInt(viewerElement.innerText.replace(',', ''));
+            current += change;
+            viewerElement.innerText = current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }, 3000);
+
+        // Zmiana paska celu tipów
+        const goalBar = document.getElementById('goal-bar');
+        setInterval(() => {
+            let width = parseFloat(goalBar.style.width);
+            if (width < 96) {
+                width += 0.2;
+                goalBar.style.width = width + '%';
+            }
+        }, 15000);
+
+        // Symulacja pisania wiadomości ("Ewelina pisze wiadomość...")
+        const typingStatus = document.getElementById('chat-typing-status');
+        setInterval(() => {
+            if (typingStatus.style.opacity === '0') {
+                typingStatus.style.opacity = '1';
+            } else {
+                typingStatus.style.opacity = '0';
+            }
+        }, 12000);
+    </script>
+</body>
+</html>
